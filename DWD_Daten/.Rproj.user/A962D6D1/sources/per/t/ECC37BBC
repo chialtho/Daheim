@@ -1,0 +1,28 @@
+{
+    "id": "ECC37BBC",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1707474869506.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "id": "343b52b4673d4c91b09d6ca26c2bc475",
+        "name": "p",
+        "title": "p",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 13511194026246256,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1707474869506,
+    "read_only": false,
+    "read_only_alternatives": []
+}

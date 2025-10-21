@@ -1,0 +1,60 @@
+---
+title: "Plot Animation"
+author: "Chiara Thomas"
+date: '2024-02-09'
+output: pdf_document
+---
+
+
+## Time series animation
+
+
+```{r load_libraries, include=FALSE}
+setwd("C:/Users/Chiara/Programmierung/Daheim/DWD_Daten/")
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(gganimate)
+library(readxl)
+```
+
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+
+```{r import_data}
+
+time_series_data <- read_excel("Monatsmittel_T_Abweichungen.xlsx", sheet = "TempMittel_korr", range = "B5:Q242", col_names = FALSE)
+time_series_data <- as_tibble(time_series_data)
+
+time_series_data <- time_series_data %>% select('...1', '...16')
+time_series_data <- rename(time_series_data, Jahr = '...1', Mitteltemperatur = '...16')
+
+
+```
+
+Plot Animation with gganimate
+
+```{r plot animation}
+p <- ggplot(
+  time_series_data,
+  aes(x = Jahr, y =  Mitteltemperatur)
+  ) +
+  geom_line(color = "blue") +
+  labs(x = "Year", y = "Temperature")
+
+p <- p + transition_reveal(Jahr)
+```
+
+
+```{r plot animation2}
+p + view_follow(fixed_x = TRUE,
+fixed_y = c(2500, NA)) + view_step(pause_length = 2,
+step_length = 1,
+nstep = 242)
+
+```
+
+

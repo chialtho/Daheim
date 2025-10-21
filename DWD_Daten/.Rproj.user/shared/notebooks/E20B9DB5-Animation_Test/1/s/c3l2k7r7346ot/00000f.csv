@@ -1,0 +1,8 @@
+"0","p <- ggplot("
+"0","  time_series_data,"
+"0","  aes(x = Jahr, y =  Mitteltemperatur)"
+"0","  ) +"
+"0","  geom_line(color = ""blue"") +"
+"0","  labs(x = ""Year"", y = ""Temperature"")"
+"0",""
+"0","p <- p + transition_reveal(Jahr)"

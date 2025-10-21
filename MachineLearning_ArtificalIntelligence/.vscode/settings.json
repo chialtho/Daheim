@@ -1,0 +1,73 @@
+{
+    "C_Cpp.autocompleteAddParentheses": true,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "sklearn",
+            "depth": 2
+        },
+        {
+            "name": "matplotlib",
+            "depth": 2
+        },
+        {
+            "name": "scipy",
+            "depth": 2
+        },
+        {
+            "name": "django",
+            "depth": 2
+        },
+        {
+            "name": "flask",
+            "depth": 2
+        },
+        {
+            "name": "fastapi",
+            "depth": 2
+        }
+    ],
+    "python.terminal.executeInFileDir": false,
+    "r.workspaceViewer.removeHiddenItems": true,
+    "todohighlight.isEnable": true,
+    "todohighlight.isCaseSensitive": true,
+    "todohighlight.defaultStyle": {
+        "backgroundColor": "#00fff3",
+        "color": "#a5a5e7"
+    },
+    "todohighlight.keywords": [
+
+        "DEBUG:",
+        {
+            "text": "NOTE:",
+            "color": "#7400c4",
+            "backgroundColor": "#00c4a0"
+        },
+        {
+            "text": "TODO:",
+            "color": "#ff0093",
+            "border": "1px solid blue",
+            "borderRadius": "2px",
+            "backgroundColor": "#101a81"
+        }
+    ],
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.py",
+        "**/*.ipynb",
+        "**/*.R"
+    ]
+}

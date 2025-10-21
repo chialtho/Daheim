@@ -1,0 +1,8 @@
+"0",""
+"0","time_series_data <- read_excel(""Monatsmittel_T_Abweichungen.xlsx"", sheet = ""TempMittel_korr"", range = ""B5:Q242"", col_names = FALSE)"
+"0","time_series_data <- as_tibble(time_series_data)"
+"0",""
+"0","time_series_data <- time_series_data %>% select('...1', '...16')"
+"0","time_series_data <- rename(time_series_data, Jahr = '...1', Mitteltemperatur = '...16')"
+"0",""
+"0",""
