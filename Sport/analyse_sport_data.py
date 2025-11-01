@@ -3,6 +3,54 @@
 
 import pandas as pd
 import argparse as ap
+import matplotlib.pyplot as plt
+import os
+
+def time_to_seconds(x):
+        if isinstance(x, str) and ':' in x:
+            return sum(int(i) * 60 ** idx for idx, i in enumerate(reversed(x.split(':'))))
+        elif isinstance(x, str) and x.isdigit():
+            return int(x) * 60
+        else:
+            return pd.NA
+
+
+def plot_data(df, plot_dir, name_prefix):
+
+    # Plot variables per month
+    df['month'] = df['month'].astype(int)
+    monthly_data = df.groupby('month').agg({
+        'distance': 'sum',
+        'time': 'sum',
+        'strength_training': 'sum',
+        'distance_bike': 'sum'
+    }).reset_index()
+
+    fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+    axs[0, 0].bar(monthly_data['month'], monthly_data['distance'] / 1000)
+    axs[0, 0].set_title('Total Distance per Month (km)')
+    axs[0, 0].set_xlabel('Month')
+    axs[0, 0].set_ylabel('Distance Running (km)')
+    axs[0, 1].bar(monthly_data['month'], monthly_data['time'] / 3600)
+    axs[0, 1].set_title('Total Time per Month (hours)')
+    axs[0, 1].set_xlabel('Month')
+    axs[0, 1].set_ylabel('Time Running (hours)')
+    axs[1, 0].bar(monthly_data['month'], monthly_data['strength_training'] / 60)
+    axs[1, 0].set_title('Total Strength Training Time per Month (hours)')
+    axs[1, 0].set_xlabel('Month')
+    axs[1, 0].set_ylabel('Time Strength Training (hours)')
+    axs[1, 1].bar(monthly_data['month'], monthly_data['distance_bike'] / 1000)
+    axs[1, 1].set_title('Total Biking Distance per Month (km)')
+    axs[1, 1].set_xlabel('Month')
+    axs[1, 1].set_ylabel('Distance Biking (km)')
+
+    plt.tight_layout()
+    # plt.show()
+
+    # Save plots
+    print(f"Saving plot to {plot_dir}/{name_prefix}_monthly_summary.png")
+    fig.savefig(f"{plot_dir}/{name_prefix}_monthly_summary.png")
+
 
 def main():
     parser = ap.ArgumentParser(description="Analyse sport data")
@@ -24,13 +72,7 @@ def main():
         }
     )
 
-    def time_to_seconds(x):
-        if isinstance(x, str) and ':' in x:
-            return sum(int(i) * 60 ** idx for idx, i in enumerate(reversed(x.split(':'))))
-        elif isinstance(x, str) and x.isdigit():
-            return int(x) * 60
-        else:
-            return pd.NA
+    
 
     df['time'] = df['time'].apply(time_to_seconds)
     df['time_bike'] = df['time_bike'].apply(time_to_seconds)
@@ -80,6 +122,14 @@ def main():
         f.write(f"- **Outside running:** {avg_speed_l:.2f} km/h\n")
         f.write(f"- **Cycling:** {avg_speed_bike:.2f} km/h\n")
         f.write(f"- **Swimming:** {avg_speed_s:.2f} km/h\n")
+
+    # Generate plots
+    print(args.f)
+    # Extract year from filename with format Sport/Sport_2025.txt
+    year = args.f.split('_')[1].split('.')[0]
+    plot_dir = "Sport/plots"
+    os.makedirs(plot_dir, exist_ok=True)
+    plot_data(df, plot_dir, year)
 
 if __name__ == "__main__":
     main()
