@@ -1,7 +1,7 @@
 Monat,Tag,Typ,Strecke in km,Zeit,Krafttraining,F-Strecke,F-Zeit
 1,1,,,,,,
-1,2,,,,,,
-1,3,,,,,,
+1,2,F,,,60,8.5,21:20
+1,3,F,3,18,60,,
 1,4,,,,,,
 1,5,,,,,,
 1,6,,,,,,
