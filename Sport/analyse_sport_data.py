@@ -83,22 +83,27 @@ def main():
     
     df['distance_f'] = df.apply(lambda x: x['distance'] if x['type'] == 'F' else pd.NA, axis=1)
     df['distance_l'] = df.apply(lambda x: x['distance'] if x['type'] == 'L' else pd.NA, axis=1)
+    df['distance_blade'] = df.apply(lambda x: x['distance'] if x['type'] == 'B' else pd.NA, axis=1)
     total_distance_f = df['distance_f'].sum(skipna=True)
     total_distance_l = df['distance_l'].sum(skipna=True)
     total_distance_bike = df['distance_bike'].sum(skipna=True)
+    total_distance_blade = df['distance_blade'].sum(skipna=True)
     total_time_strength = df['strength_training'].sum(skipna=True) # in minutes
     total_time_strength_str = f"{int(total_time_strength/60)}h {int(total_time_strength % 60):02d}min"
 
     df['distance'] = df['distance'] * 1000
     df['distance_bike'] = df['distance_bike'] * 1000
+    df['distance_blade'] = df['distance_blade'] * 1000
 
     df['speed_f'] = df.apply(lambda x: x['distance'] / x['time'] if x['type'] == 'F' and pd.notna(x['distance']) and pd.notna(x['time']) and x['time'] != 0 else pd.NA, axis=1)
     df['speed_l'] = df.apply(lambda x: x['distance'] / x['time'] if x['type'] == 'L' and pd.notna(x['distance']) and pd.notna(x['time']) and x['time'] != 0 else pd.NA, axis=1)
     df['speed_bike'] = df.apply(lambda x: x['distance_bike'] / x['time_bike'] if pd.notna(x['distance_bike']) and pd.notna(x['time_bike']) and x['time_bike'] != 0 else pd.NA, axis=1)
+    df['speed_blade'] = df.apply(lambda x: x['distance_blade'] / x['time'] if x['type'] == 'B' and pd.notna(x['distance_blade']) and pd.notna(x['time']) and x['time'] != 0 else pd.NA, axis=1)
 
     avg_speed_f = df['speed_f'].mean(skipna=True) * 3.6
     avg_speed_l = df['speed_l'].mean(skipna=True) * 3.6
     avg_speed_bike = df['speed_bike'].mean(skipna=True) * 3.6
+    avg_speed_blade = df['speed_blade'].mean(skipna=True) * 3.6
 
     df['speed_s'] = df.apply(lambda x: x['distance'] / x['time'] if x['type'] == 'S' and pd.notna(x['distance']) and pd.notna(x['time']) and x['time'] != 0 else pd.NA, axis=1)
     avg_speed_s = df['speed_s'].mean(skipna=True) * 3.6
@@ -116,12 +121,14 @@ def main():
         f.write(f"- **Total distance run outside:** {total_distance_l:.2f} km\n")
         f.write(f"- **Total distance cycled:** {total_distance_bike:.2f} km\n")
         f.write(f"- **Total distance swimming:** {total_distance_s:.2f} km\n")
+        f.write(f"- **Total distance skating:** {total_distance_blade:.2f} km\n")
         f.write(f"- **Total time spent on strength training:** {total_time_strength_str}\n\n")
         f.write("## Average Speeds\n")
         f.write(f"- **Treadmill running:** {avg_speed_f:.2f} km/h\n")
         f.write(f"- **Outside running:** {avg_speed_l:.2f} km/h\n")
         f.write(f"- **Cycling:** {avg_speed_bike:.2f} km/h\n")
         f.write(f"- **Swimming:** {avg_speed_s:.2f} km/h\n")
+        f.write(f"- **Inline skating:** {avg_speed_blade:.2f} km/h\n")
 
     # Generate plots
     print(args.f)
