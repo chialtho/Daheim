@@ -19,12 +19,20 @@ def plot_data(df, plot_dir, name_prefix):
 
     # Plot variables per month
     df['month'] = df['month'].astype(int)
+
+    
     monthly_data = df.groupby('month').agg({
-        'distance': 'sum',
-        'time': 'sum',
         'strength_training': 'sum',
         'distance_bike': 'sum'
     }).reset_index()
+
+    monthly_data_running = df[df['type'].isin(['F', 'L'])].groupby('month').agg({
+        'distance': 'sum',
+        'time': 'sum'
+    }).reset_index()
+
+    monthly_data = pd.merge(monthly_data, monthly_data_running, on='month', how='left')
+    
 
     fig, axs = plt.subplots(2, 2, figsize=(12, 10))
     axs[0, 0].bar(monthly_data['month'], monthly_data['distance'] / 1000)
