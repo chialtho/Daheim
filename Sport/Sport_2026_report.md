@@ -3,20 +3,20 @@
 ## Sport Counts
 | type   |   count |
 |:-------|--------:|
-| F      |     134 |
+| F      |     136 |
 | S      |      12 |
 | K      |       5 |
 | L      |       4 |
 | B      |       4 |
-| Total  |     159 |
+| Total  |     161 |
 
 ## Summary
-- **Total distance run on treadmill:** 485.51 km
+- **Total distance run on treadmill:** 498.51 km
 - **Total distance run outside:** 24.23 km
 - **Total distance cycled:** 636.81 km
 - **Total distance swimming:** 30.50 km
 - **Total distance skating:** 61.81 km
-- **Total time spent on strength training:** 118h 06min
+- **Total time spent on strength training:** 119h 36min
 
 ## Average Speeds
 - **Treadmill running:** 9.96 km/h
