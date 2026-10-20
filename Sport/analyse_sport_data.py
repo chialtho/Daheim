@@ -98,6 +98,8 @@ def main():
     total_distance_blade = df['distance_blade'].sum(skipna=True)
     total_sets_strength = df['strength_training'].sum(skipna=True) # number of sets
     avg_sets_strength = df['strength_training'].mean(skipna=True) # average sets per session
+    total_count_climbs = df[df['type'] == 'C']['distance'].sum(skipna=True) # number of climbs
+    avg_count_climbs = df[df['type'] == 'C']['distance'].mean(skipna=True) # average climbs per session
 
     df['distance'] = df['distance'] * 1000
     df['distance_bike'] = df['distance_bike'] * 1000
@@ -131,7 +133,9 @@ def main():
         f.write(f"- **Total distance swimming:** {total_distance_s:.2f} km\n")
         f.write(f"- **Total distance skating:** {total_distance_blade:.2f} km\n")
         f.write(f"- **Total number of sets (strength training):** {total_sets_strength:,.0f}\n")
-        f.write(f"- **Average number of sets (strength training):** {avg_sets_strength:.2f}\n\n")
+        f.write(f"- **Average number of sets (strength training):** {avg_sets_strength:.2f}\n")
+        f.write(f"- **Total number of climbs:** {total_count_climbs:,.0f}\n")
+        f.write(f"- **Average number of climbs:** {avg_count_climbs:.2f}\n\n")
         f.write("## Average Speeds\n")
         f.write(f"- **Treadmill running:** {avg_speed_f:.2f} km/h\n")
         f.write(f"- **Outside running:** {avg_speed_l:.2f} km/h\n")
